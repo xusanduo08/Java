@@ -17,10 +17,7 @@ public class Convert {
 
 	public static void main(String[] args) throws IOException {
 		BufferedReader br = new BufferedReader(  //缓冲流
-				new InputStreamReader(  //转成字符流，可以指定解码字符集
-						new FileInputStream(new File("E:/Git/sss.txt")//字节流
-					)
-				)
+				new InputStreamReader(new FileInputStream(new File("E:/Git/sss.txt")),"utf-8")//字节流转成字符流，可以指定解码字符集
 				
 				);
 		//写出文件
