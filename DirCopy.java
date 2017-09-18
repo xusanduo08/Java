@@ -11,7 +11,7 @@ public class DirCopy {
 
 	public static void main(String[] args) {
 		String srcPath = "E:\\Git";
-		String destPath = "E:\\dit";
+		String destPath = "E:\\Git\\git";
 		
 		File src = new File(srcPath);
 		File dest = new File(destPath);
@@ -47,6 +47,10 @@ public class DirCopy {
 				e.printStackTrace();
 			}
 		} else if(src.exists() && src.isDirectory()){
+			if(dest.getAbsolutePath().contains(src.getAbsolutePath())){
+				System.out.println("父目录不能拷贝到子目录中");
+				return;
+			}
 			dest.mkdirs();
 			for(File file:src.listFiles()){
 				DirCopy(file, new File(dest,file.getName()));
