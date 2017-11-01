@@ -68,8 +68,8 @@ public class Server {
 		private void send(String msg){
 			if(null != msg || !msg.equals("")){
 				try {
-					dos.writeUTF(msg);
-					dos.flush();
+					this.dos.writeUTF(msg);
+					this.dos.flush();
 				} catch (IOException e) {
 					e.printStackTrace();
 					isRunning = false;
@@ -81,13 +81,29 @@ public class Server {
 		}
 		
 		private void sendAll(String msg){
-			
-			//遍历容器，把消息发送到其他客户端
-			for(Channel other:all){
-				if(other == this){
-					continue;
+			/*
+			 * 判断是否私聊
+			 * */
+			if(msg.startsWith("@") && msg.indexOf(":")>-1){
+				String name = msg.substring(1, msg.indexOf(":"));
+				String content = msg.substring(msg.indexOf(":") + 1);
+				
+				for(Channel other: all){
+					if(other.name.equals(name)){
+						other.send(this.name + "对您悄悄的说" + content);
+					}
 				}
-				other.send(msg);
+			} else {
+				/*
+				 * 不满足私聊格式，则消息为群发
+				 * 遍历容器，把消息发送到其他客户端
+				 * */
+				for(Channel other:all){
+					if(other == this){
+						continue;
+					}
+					other.send(this.name + "对所有人说：" +msg);
+				}
 			}
 		}
 		
