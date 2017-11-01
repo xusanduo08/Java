@@ -34,7 +34,7 @@ public class Receive implements Runnable {
 	public void run() {
 		while(isRunning){
 			//this.receive();
-			System.out.println(" ’µΩ" + receive());
+			System.out.println(receive());
 		}
 	}
 }

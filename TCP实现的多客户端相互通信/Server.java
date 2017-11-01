@@ -36,13 +36,17 @@ public class Server {
 		private DataInputStream dis;
 		private DataOutputStream dos;
 		private boolean isRunning = true;
+		private String name;
 		
 		public Channel(Socket client){
 			try {
 				dis = new DataInputStream(client.getInputStream());
 				dos = new DataOutputStream(client.getOutputStream());
+				
+				this.name = dis.readUTF();
+				this.send(this.name + "欢迎进入聊天室");  //欢迎自己进入聊天室
+				this.sendAll(this.name + "进入聊天室");  //告诉其他人有人进入聊天室
 			} catch (IOException e) {
-				e.printStackTrace();
 				isRunning = false;
 				CloseUtil.closeAll(dis, dos);
 			}
@@ -76,8 +80,8 @@ public class Server {
 			}
 		}
 		
-		private void sendAll(){
-			String msg = this.receive();
+		private void sendAll(String msg){
+			
 			//遍历容器，把消息发送到其他客户端
 			for(Channel other:all){
 				if(other == this){
@@ -90,7 +94,8 @@ public class Server {
 		@Override
 		public void run() {
 			while(isRunning){
-				sendAll();
+				String msg = this.receive();
+				sendAll(msg);
 			}
 		}
 		

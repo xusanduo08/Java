@@ -12,6 +12,7 @@ public class Send implements Runnable{
 	//输出流
 	private DataOutputStream dos;
 	private boolean isRunning = true;
+	private String name;
 	
 	
 	/*
@@ -31,9 +32,7 @@ public class Send implements Runnable{
 	/*
 	 * 2 发送数据
 	 * */
-	public void send() {
-		String msg = getMsgFromConsole();
-		
+	public void send(String msg) {
 		if(null != msg && !msg.equals("")){
 			try {
 				dos.writeUTF(msg);
@@ -49,6 +48,18 @@ public class Send implements Runnable{
 		console = new BufferedReader(new InputStreamReader(System.in));
 	}
 	
+	public Send(Socket client, String name){
+		this();
+		try {
+			this.dos = new DataOutputStream(client.getOutputStream());
+			this.name = name;
+			this.send(name);
+		} catch (IOException e) {
+			e.printStackTrace();
+			this.isRunning = false;
+		}
+	}
+	
 	public Send(Socket client){
 		this();
 		try {
@@ -57,14 +68,13 @@ public class Send implements Runnable{
 			e.printStackTrace();
 			this.isRunning = false;
 		}
-		
-		
 	}
 	
 	@Override
 	public void run() {
 		while(isRunning){
-			send();
+			String msg = getMsgFromConsole();
+			send(msg);
 		}
 	}
 	
