@@ -45,7 +45,7 @@ public class Server {
 				
 				this.name = dis.readUTF();
 				this.send(this.name + "欢迎进入聊天室");  //欢迎自己进入聊天室
-				this.sendAll(this.name + "进入聊天室");  //告诉其他人有人进入聊天室
+				this.sendAll(this.name + "进入聊天室", true);  //告诉其他人有人进入聊天室
 			} catch (IOException e) {
 				isRunning = false;
 				CloseUtil.closeAll(dis, dos);
@@ -61,7 +61,6 @@ public class Server {
 				CloseUtil.closeAll(dis, dos);
 				all.remove(this);//出现异常，移出自身
 			}
-			
 			return msg;
 		}
 		
@@ -80,7 +79,7 @@ public class Server {
 			}
 		}
 		
-		private void sendAll(String msg){
+		private void sendAll(String msg, boolean sys){
 			/*
 			 * 判断是否私聊
 			 * */
@@ -90,7 +89,7 @@ public class Server {
 				
 				for(Channel other: all){
 					if(other.name.equals(name)){
-						other.send(this.name + "对您悄悄的说" + content);
+						other.send(this.name + "对您悄悄的说：" + content);
 					}
 				}
 			} else {
@@ -102,7 +101,12 @@ public class Server {
 					if(other == this){
 						continue;
 					}
-					other.send(this.name + "对所有人说：" +msg);
+					if(sys){
+						other.send("系统消息: " + msg);
+					} else {
+						other.send(this.name + "对所有人说：" +msg);
+					}
+					
 				}
 			}
 		}
@@ -111,7 +115,7 @@ public class Server {
 		public void run() {
 			while(isRunning){
 				String msg = this.receive();
-				sendAll(msg);
+				sendAll(msg, false);
 			}
 		}
 		
