@@ -44,30 +44,13 @@ public class Tomcat {
 			System.out.println(msg);
 			
 			StringBuilder responseContent = new StringBuilder();
-			responseContent.append("<!DOCTYPE html><html><head><title>表单提交</title></head><body>Hello</body></html>");
-			//构建响应消息
-			StringBuilder response = new StringBuilder();
-			//HTTP协议版本、状态码、描述
-			response.append("HTTP/1.1").append(this.SPACE).append("200 ok").append(CRLF);
-			//响应头
-			response.append("Server:BWS/1.1").append(CRLF);
-			response.append("Date:").append(new Date()).append(CRLF);
-			response.append("Content-Type:text/html;charset=GBK").append(CRLF);
-			//正文长度--字节数
-			response.append("Content-Length:").append(responseContent.toString().getBytes().length).append(CRLF);
 			
-			response.append(CRLF);//空一行，开始正文
-			
-			//正文
-			response.append(responseContent).append(CRLF);
-			
-			//输出流
-			BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(client.getOutputStream()));
-			bw.write(response.toString());
-			bw.flush();
-			bw.close();
+			Response rep = new Response(client.getOutputStream());
+			rep.print("<!DOCTYPE html><html><head><title>表单提交</title></head><body>Hello</body></html>");
+			rep.pushToClient(404);
 		} catch (IOException e) {
 			e.printStackTrace();
+			
 		}
 	}
 	
