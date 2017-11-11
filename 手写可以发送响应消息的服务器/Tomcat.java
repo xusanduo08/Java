@@ -31,20 +31,15 @@ public class Tomcat {
 		}
 	}
 
-	//接收客户端
+	//接收客户端信息
 	private void receive(){
 		try {
 			Socket client = server.accept();
-			
-			byte[] data = new byte[20480];
-			int len = client.getInputStream().read(data);
-			String msg = new String(data, 0, len);//接收客户端请求信息
-			
-			//接收客户端请求信息
-			System.out.println(msg);
+			//获取请求信息
+			Request req = new Request(client.getInputStream());
 			
 			StringBuilder responseContent = new StringBuilder();
-			
+			//生成响应信息
 			Response rep = new Response(client.getOutputStream());
 			rep.print("<!DOCTYPE html><html><head><title>表单提交</title></head><body>Hello</body></html>");
 			rep.pushToClient(404);
