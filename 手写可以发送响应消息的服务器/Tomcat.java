@@ -16,42 +16,54 @@ public class Tomcat {
 	private ServerSocket server;
 	private static final String CRLF = "\r\n";
 	private static final String SPACE = " ";
+	private boolean isShutdown = false;
+	
 	public static void main(String[] args) {
 		Tomcat tomcat = new Tomcat();
 		tomcat.start();
 	}
 	
-	//启动服务器
+	/**
+	 * @desc 以默认端口启动服务器
+	 * **/
 	public void start(){
+		start(8888);
+	}
+	
+	/**
+	 * @desc 启动服务器
+	 * @param 指定端口
+	 * */
+	public void start(int port){
 		try {
-			server = new ServerSocket(8888);
+			server = new ServerSocket(port);
 			this.receive();
 		} catch (IOException e) {
-			e.printStackTrace();
+			stop();
 		}
 	}
 
-	//接收客户端信息
+	/**
+	 * @desc 接收客户端信息
+	 * **/
 	private void receive(){
 		try {
-			Socket client = server.accept();
-			//获取请求信息
-			Request req = new Request(client.getInputStream());
-			
-			//生成响应信息
-			Response rep = new Response(client.getOutputStream());
-			
-			//将具体响应消息生成动作封装到类中
-			Servlet servlet = new Servlet();
-			servlet.service(req, rep);
+			while(!isShutdown){
+				Socket client = server.accept();
+				//将消息的发送和接收封装到线程中
+				Dispatcher dis = new Dispatcher(client);
+				new Thread(dis).start();
+			}
 		} catch (IOException e) {
-			e.printStackTrace();
-			
+			this.stop();
 		}
 	}
 	
-	//停止服务器
+	/**
+	 * @desc 停止服务器 
+	 * **/
 	public void stop(){
-		
+		isShutdown = true;
+		CloseUtil.closeAll(server);
 	}
 }

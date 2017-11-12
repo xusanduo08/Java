@@ -7,7 +7,7 @@ import java.io.OutputStreamWriter;
 import java.util.Date;
 
 /*
- * 封装发送响应消息功能
+ * 封装响应消息
  * */
 
 public class Response {
