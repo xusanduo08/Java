@@ -38,12 +38,12 @@ public class Tomcat {
 			//获取请求信息
 			Request req = new Request(client.getInputStream());
 			
-			StringBuilder responseContent = new StringBuilder();
 			//生成响应信息
 			Response rep = new Response(client.getOutputStream());
-			rep.print("<!DOCTYPE html><html><head><title>表单提交</title></head>");
-			rep.print("<body>Hello,欢迎").print(req.getParamter("uname")).print("</body></html>");
-			rep.pushToClient(404);
+			
+			//将具体响应消息生成动作封装到类中
+			Servlet servlet = new Servlet();
+			servlet.service(req, rep);
 		} catch (IOException e) {
 			e.printStackTrace();
 			
