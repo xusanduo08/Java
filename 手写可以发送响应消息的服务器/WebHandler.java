@@ -114,16 +114,4 @@ public class WebHandler extends DefaultHandler {
 		//ÎÄµµ½âÎö½áÊø
 	}
 
-	public static void main(String[] args) throws SAXException, IOException, ParserConfigurationException{
-		SAXParserFactory factory = SAXParserFactory.newInstance();
-		SAXParser sax = factory.newSAXParser();
-		WebHandler web = new WebHandler();
-		sax.parse(Thread.currentThread().getContextClassLoader()
-				.getResourceAsStream("com/mengfansheng/net/web.xml"), web);
-		
-		System.out.println(web.getEntityList());
-	}
-
-	
-	
 }
