@@ -1,15 +1,14 @@
-package com.mengfansheng.net;
+package com.mengfansheng.servlet;
+
+import com.mengfansheng.server.Request;
+import com.mengfansheng.server.Response;
 
 /**
  * 登录响应信息的的工厂类
  * **/
 public class LoginServlet extends Servlet {
-
 	@Override
 	public void doGet(Request req, Response rep) throws Exception {
-		rep.print("<!DOCTYPE html><html><head><title>表单提交</title></head>");
-		rep.print("<body>Hello,欢迎").print(req.getParamter("uname")).print("</body></html>");
-		
 		String name = req.getParamter("uname");
 		String pwd = req.getParamter("pwd");
 		

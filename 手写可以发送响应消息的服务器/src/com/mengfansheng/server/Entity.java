@@ -1,4 +1,4 @@
-package com.mengfansheng.net;
+package com.mengfansheng.server;
 /**
  * ÊµÌåÀà£¬´æ´¢
  * <servlet-name>login</servlet-name>

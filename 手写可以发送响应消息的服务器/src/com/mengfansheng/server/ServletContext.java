@@ -1,4 +1,4 @@
-package com.mengfansheng.net;
+package com.mengfansheng.server;
 
 import java.util.HashMap;
 import java.util.Map;

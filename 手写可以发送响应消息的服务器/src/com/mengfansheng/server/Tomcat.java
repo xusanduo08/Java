@@ -1,4 +1,4 @@
-package com.mengfansheng.net;
+package com.mengfansheng.server;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
@@ -8,6 +8,8 @@ import java.io.OutputStreamWriter;
 import java.net.ServerSocket;
 import java.net.Socket;
 import java.util.Date;
+
+import com.mengfansheng.net.CloseUtil;
 
 /*
  * 创建服务器，并启动

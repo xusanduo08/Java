@@ -1,4 +1,4 @@
-package com.mengfansheng.net;
+package com.mengfansheng.server;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -9,6 +9,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.StringTokenizer;
+
+import com.mengfansheng.net.CloseUtil;
 
 /*
  * 解析请求报文
@@ -36,6 +38,22 @@ public class Request {
 		this.requestInfo = "";
 	}
 	
+	public String getMethod() {
+		return method;
+	}
+
+	public void setMethod(String method) {
+		this.method = method;
+	}
+
+	public String getUrl() {
+		return url;
+	}
+
+	public void setUrl(String url) {
+		this.url = url;
+	}
+
 	public Request(InputStream is){
 		this();
 		this.is = is;
@@ -44,9 +62,10 @@ public class Request {
 			int len;
 			len = is.read(data);
 			this.requestInfo = new String(data, 0, len);
-			System.out.println(this.requestInfo);
+			
 		} catch (IOException e) {
 			e.printStackTrace();
+			System.out.println("============");
 			CloseUtil.closeAll(is);
 		}
 		this.parseRequestInfo();

@@ -2,11 +2,11 @@
 <web-app>
 	<servlet>
 		<servlet-name>login</servlet-name>
-		<servlet-class>com.mengfansheng.net.LoginServlet</servlet-class>
+		<servlet-class>com.mengfansheng.servlet.LoginServlet</servlet-class>
 	</servlet>
 	<servlet>
 		<servlet-name>register</servlet-name>
-		<servlet-class>com.mengfansheng.net.RegisterServlet</servlet-class>
+		<servlet-class>com.mengfansheng.servlet.RegisterServlet</servlet-class>
 	</servlet>
 	<servlet-mapping>
 		<servlet-name>login</servlet-name>

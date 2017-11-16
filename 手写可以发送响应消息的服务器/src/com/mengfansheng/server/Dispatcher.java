@@ -1,7 +1,10 @@
-package com.mengfansheng.net;
+package com.mengfansheng.server;
 
 import java.io.IOException;
 import java.net.Socket;
+
+import com.mengfansheng.net.CloseUtil;
+import com.mengfansheng.servlet.Servlet;
 
 /**
  * 实现接收与响应的多线程
@@ -25,9 +28,17 @@ public class Dispatcher implements Runnable{
 	
 	@Override
 	public void run() {
-		//将具体响应消息生成动作封装到类中
-		Servlet servlet = new Servlet();
-		servlet.service(req, rep);
+		try {
+			Servlet servlet = WebApp.getServlet(req.getUrl());
+			if(null == servlet){
+				this.code = 404;
+			} else {
+				servlet.service(req, rep); //多态了，继承，子类对象调用父类方法
+			}
+		} catch (Exception e) {
+			this.code = 500;
+			e.printStackTrace();
+		}
 	
 		rep.pushToClient(code);
 		CloseUtil.closeAll(client);

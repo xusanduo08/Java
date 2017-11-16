@@ -1,4 +1,8 @@
-package com.mengfansheng.net;
+package com.mengfansheng.servlet;
+
+import com.mengfansheng.server.Request;
+import com.mengfansheng.server.Response;
+
 /**
  * 注册的工厂类
  * **/

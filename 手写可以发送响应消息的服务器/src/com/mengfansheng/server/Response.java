@@ -1,10 +1,12 @@
-package com.mengfansheng.net;
+package com.mengfansheng.server;
 
 import java.io.BufferedWriter;
 import java.io.IOException;
 import java.io.OutputStream;
 import java.io.OutputStreamWriter;
 import java.util.Date;
+
+import com.mengfansheng.net.CloseUtil;
 
 /*
  * 封装响应消息

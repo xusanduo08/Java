@@ -1,4 +1,8 @@
-package com.mengfansheng.net;
+package com.mengfansheng.servlet;
+
+import com.mengfansheng.server.Request;
+import com.mengfansheng.server.Response;
+
 /**
  * @desc 一个抽象类，便于子类继承去生成对应不同上下文的返回信息
  * **/

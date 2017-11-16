@@ -1,4 +1,4 @@
-package com.mengfansheng.net;
+package com.mengfansheng.server;
 
 import java.io.IOException;
 import java.util.List;
@@ -9,6 +9,8 @@ import javax.xml.parsers.SAXParser;
 import javax.xml.parsers.SAXParserFactory;
 
 import org.xml.sax.SAXException;
+
+import com.mengfansheng.servlet.Servlet;
 /**
  * 用来通过请求的url返回对应的响应消息
  * **/
@@ -23,7 +25,7 @@ public class WebApp {
 			SAXParser sax = factory.newSAXParser();
 			
 			sax.parse(Thread.currentThread().getContextClassLoader()
-					.getResourceAsStream("com/mengfansheng/net/web.xml"), web);
+					.getResourceAsStream("WEB-INF/web.xml"), web);
 		} catch (ParserConfigurationException e) {
 			e.printStackTrace();
 		} catch (SAXException e) {
