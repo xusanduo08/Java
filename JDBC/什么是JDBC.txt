@@ -1,0 +1,25 @@
+1、概念：
+   JDBC(Java Database Connection):为java开发者使用数据库提供了统一的编程接口，它由一组java类和接口组成。是java程序与数据库系统通信的标准API。JDBC API使得开发人员可以使用纯java的方式来连接数据库，并执行操作。
+
+sun公司由于不知道各个主流商用数据库的程序的代码，因此无法自己写代码连接各个数据库。所以，sun公司决定，自己提供一套api，凡是数据库想与java进行连接的，数据库厂商自己必须实现JDBC这套接口。而数据库厂商的JDBC实现，我们就叫做此数据库的数据库驱动。
+
+JDBC访问数据库流程：java与数据库之间的连接本质上是一个socket连接
+	
+	驱动管理器	加载JDBC驱动程序
+	    ||
+            ||
+	    \/
+        连接数据库	建立与数据库的连接
+            ||
+            ||
+            \/
+	SQL语句		发送SQL查询
+            ||
+            ||
+            \/
+	结果集		得到查询结果
+
+
+装载MySQL驱动：Class.forName("com.mysql.jdbc.Driver")
+
+装载Oracle驱动：Class.forName("oracle.jdbc.driver.OracleDriver")
