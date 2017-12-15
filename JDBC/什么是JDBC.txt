@@ -23,3 +23,9 @@ JDBC访问数据库流程：java与数据库之间的连接本质上是一个socket连接
 装载MySQL驱动：Class.forName("com.mysql.jdbc.Driver")
 
 装载Oracle驱动：Class.forName("oracle.jdbc.driver.OracleDriver")
+
+建立mysql数据库：
+	Connection conn = DriverManager.getConnection("jdbc:mysql://host:port/database","user","password")
+
+建立oracle数据库连接：
+	Connection conn = DriverManager.getConnection("jdbc:oracle:thin:@host:port:database","user","password")
