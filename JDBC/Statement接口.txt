@@ -1,0 +1,13 @@
+Statement接口：
+	1.用于执行静态sql语句并返回它所生成结果的对象
+	2.三种Statement类：
+		Statement：
+		    --由createStatement创建，用于发送简单的SQL语句。
+		PreparedStatement：
+		    --继承自Statement接口，由prepareStatement创建，用于发送含有一个或多个输入参数的sql语句。PreparedStatement对象比Statement对象的效率更高，并且可以防止sql注入。使用较多
+		CallableStatement：
+		    --继承自PreparedStatement。由方法prePareCall创建，用于调用存储过程。
+	3.常用的Statement方法：
+	   exectue()：运行语句，返回是否有结果集。
+	   exectueQuery()：运行select语句，返回ResultSet结果集
+	   exectueUpdate()：运行inset/update/delete操作，返回更新的行数。
