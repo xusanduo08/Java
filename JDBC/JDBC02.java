@@ -12,11 +12,13 @@ import java.sql.Statement;
 public class JDBC02 {
 
 	public static void main(String[] args){
+		Connection conn = null;
+		Statement stmt = null;
 		try {
 			Class.forName("com.mysql.jdbc.Driver");
-			Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/jdbc","root", "");
+			conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/jdbc","root", "");
 			
-			Statement stmt = conn.createStatement();//执行sql语句，并返回相关结果
+			stmt = conn.createStatement();//执行sql语句，并返回相关结果
 			//String sql = "insert into user(id, name, age,work) values (null, 'mengfansheng', 25, 'IT')";
 			//stmt.execute(sql);
 			
@@ -34,6 +36,22 @@ public class JDBC02 {
 			e.printStackTrace();
 		} catch (SQLException e) {
 			e.printStackTrace();
+		} finally {
+			if(stmt != null) {
+				try {
+					stmt.close();
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
+			}
+			
+			if(conn != null) {
+				try {
+					conn.close();
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
+			}
 		}
 		
 		

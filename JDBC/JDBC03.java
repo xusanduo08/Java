@@ -11,14 +11,15 @@ import java.sql.SQLException;
 public class JDBC03 {
 
 	public static void main(String[] args){
-		
+		Connection conn = null;
+		PreparedStatement ps = null;
 		try {
 			//加载驱动类
 			Class.forName("com.mysql.jdbc.Driver");
-			Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/jdbc", "root", "");
+			conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/jdbc", "root", "");
 		
 			String sql = "insert into user(name, age, work) values (?, ? ,?)";//使用占位符
-			PreparedStatement ps = conn.prepareStatement(sql);
+			ps = conn.prepareStatement(sql);
 			//使用setXXX()方法设置字段值，这地方的索引从1开始
 			ps.setString(1, "孟凡胜");
 			ps.setInt(2, 27);
@@ -40,6 +41,22 @@ public class JDBC03 {
 			e.printStackTrace();
 		} catch (SQLException e) {
 			e.printStackTrace();
+		} finally {
+			if(ps != null) {
+				try {
+					ps.close();
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
+			}
+			
+			if(conn != null) {
+				try {
+					conn.close();
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
+			}
 		}
 		
 	}
