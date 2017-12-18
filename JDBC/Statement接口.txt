@@ -11,3 +11,5 @@ Statement接口：
 	   exectue()：运行语句，返回是否有结果集。
 	   exectueQuery()：运行select语句，返回ResultSet结果集
 	   exectueUpdate()：运行inset/update/delete操作，返回更新的行数。
+
+	一般exectueQuery()和exectueUpdate()用的比较多
