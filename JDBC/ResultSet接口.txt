@@ -1,0 +1,10 @@
+ResultSet接口：
+	---Statement执行SQL语句时返回ResultSet结果集
+	---RestultSet提供的检索不同类型字段的方法，常用的有：
+		getString()：获得在数据库里是varchar、char等数据类型的对象；
+		getFloat()：获得在数据库里是Float类型的对象；
+		getDate()：获得在数据库里是Date类型的数据；
+		getBoolean()：获得在数据库里面是Boolean类型的数据。
+
+依序关闭使用的对象及连接：
+	ResultSet -> Statement -> Connection
