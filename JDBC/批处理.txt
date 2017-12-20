@@ -1,0 +1,5 @@
+批处理：
+	---Batch
+	---对于大量的批处理，建议使用Statement，因为PreparedStatement的预编译空间有限，当数据量特别大时，会发生异常
+	---进行批处理时，需要设置自动提交为false  conn.setAutoCommit(false)
+	
