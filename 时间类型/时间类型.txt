@@ -1,0 +1,6 @@
+从1970年1月1日开始，以毫秒（ms）为单位表示时间，数据类型为long
+
+java.util.Date
+	子类：java.sql.Date	表示年月日
+	子类：java.sql.Time	表示时分秒
+	子类：java.sql.Timestamp表示年月日时分秒
