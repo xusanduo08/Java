@@ -20,6 +20,7 @@ public class LinkedList {
             n.setNext(null);
             n.setValue(o);
 
+			// 只有一个节点时，这个节点既是头节点也是尾节点
             first = n;
             last = n;
         } else {
