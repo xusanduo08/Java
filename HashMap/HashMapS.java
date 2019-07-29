@@ -28,11 +28,12 @@ public class HashMapS {
                     return;
                 }
             }
-            arr[pos].add(entry);
+            arr[pos].add(entry); // 没有找到相同键时直接将entry插入链表
         }
     }
 
     public Object get(Object key){
+		// 先通过key找到对应的链表，再遍历链表同时比较每个节点的key，遇到相同的就返回
         int pos = key.hashCode() % arr.length;
         LinkedList list = arr[pos];
         for(int i = 0; i < list.size(); i++){
