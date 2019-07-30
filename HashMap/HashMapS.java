@@ -14,7 +14,9 @@ public class HashMapS {
 
     public void put(Object key, Object value){
         Entry entry = new Entry(key, value);
-        int pos = key.hashCode() % arr.length;
+		int hash = key.hashCode(); // 考虑到hash值可能为负数
+		hash = hash < 0 ? -hash : hash;
+        int pos = hash % arr.length;
         if(arr[pos] == null){
             LinkedList list = new LinkedList();
             list.add(entry);
