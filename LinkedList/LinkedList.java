@@ -40,12 +40,11 @@ public class LinkedList {
     }
 
     public Object get(int index){
-        checkIndex(index);
-        if(first == null){
-            return null;
-        } else {
-            Node tmp = node(index);
+		Node tmp = node(index);
+        if(tmp != null){
             return tmp.getValue();
+        } else {
+            return null;
         }
     }
 
@@ -97,10 +96,22 @@ public class LinkedList {
        获取指定索引处的节点
      */
     private Node node(int index){
-        Node tmp = first;
-        for(int i = 0; i < index; i++){
-            tmp = tmp.getNext();
-        }
+		checkIndex(index);
+        Node tmp = null;
+		if(first != null){
+			if(index < (size >> 1)){ // 右移一位（除以2），在前半段，从前往后找
+				tmp = first;
+				for(int i = 0; i < index; i++){
+					tmp = tmp.getNext()
+				}
+			}
+		} else { // 在后半段，从后往前找
+			tmp = last;
+			for(int i = size; i > index; i++){
+				tmp = tmp.getPrevious();
+			}
+		}
+        
         return tmp;
     }
 
