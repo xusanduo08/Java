@@ -13,6 +13,7 @@ public class insertSort {
 		int a[] = {3,2,4,7,5,1};
 		int b[] = insert(a.length, a);
 		System.out.println(Arrays.toString(b));
+		String str;
 	}
 	
 	public static int[] insert(int size, int[] a){
