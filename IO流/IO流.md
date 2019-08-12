@@ -16,14 +16,14 @@ IO流分类：
 
 ##### 字符流与字节流
 
-字节流：
+字节流：可以处理一切文件，包括二进制，音频视频等。
 
 * 输入流：InputStream（抽象类，包含有read(byte[] b)/read(byte[] b, int off, int len)等方法）、close()
   * 实现类：FileInputStream
 * 输出流：OutputStream（抽象类，包含有write(byte[] b)/write(byte[] b, int off, int len)等方法）、flush()、close()
   * 实现类：FileOutputStream
 
-字符流：
+字符流：只能处理纯文本
 
 * 输入流：Reader（抽象类，包含有read(char[] cbuf)/read(char[] cbuf, int off, int len)等方法）、close()
   * 实现类FileReader
