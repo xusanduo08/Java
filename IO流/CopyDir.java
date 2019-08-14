@@ -29,6 +29,10 @@ public class CopyDir {
     }
 
     public static void copyDetail(File src, File dest){
+		if(dest.getAbsolutePath().contains(src.getAbsolutePath())){
+            System.out.println("父目录不能拷贝到子目录中");
+            return;
+        }
          if(src.isFile()){
              CopyFile.copy(src, dest);
          } else {
