@@ -102,7 +102,7 @@ public class SplitFile {
 				actualSize = this.length - beginPos;
 			}
 			splitDetail(i, beginPos, actualSize);
-			beginPos += actualSize;//下一次起点
+			beginPos += actualSize;//下一次起点 = 本次起点 + 本次分割的大小
 		}
 	}
 	
@@ -114,12 +114,12 @@ public class SplitFile {
 		RandomAccessFile raf;//输入流
 		BufferedOutputStream bos = new BufferedOutputStream(new FileOutputStream(dest));//输出流
 		raf = new RandomAccessFile(src,"r");
-		raf.seek(beginPos);
+		raf.seek(beginPos); // 从beginPos开始读取
 		byte[] flush = new byte[1024];
 		int len = 0;
 		while(-1 != (len = raf.read(flush))){
 			
-			if(actualSize - len >= 0){
+			if(actualSize - len >= 0){ // 如果剩余待分割内容（actualSize）小于flush大小，说明本次只能写入actualSize大小的内容
 				bos.write(flush, 0 , len);
 				actualSize -= len;
 			} else {
